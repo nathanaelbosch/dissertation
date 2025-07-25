@@ -1,0 +1,15 @@
+[submodule "code/ProbNumDiffEq.jl"]
+	path = code/ProbNumDiffEq.jl
+	url = git@github.com:nathanaelbosch/ProbNumDiffEq.jl.git
+[submodule "code/papers/pick-and-mix"]
+	path = code/papers/pick-and-mix
+	url = git@github.com:nathanaelbosch/pick-and-mix.git
+[submodule "code/papers/probabilistic-exponential-integrators"]
+	path = code/papers/probabilistic-exponential-integrators
+	url = git@github.com:nathanaelbosch/probabilistic-exponential-integrators.git
+[submodule "code/papers/parallel-ode-filters"]
+	path = code/papers/parallel-ode-filters
+	url = git@github.com:nathanaelbosch/parallel-ode-filters.git
+[submodule "code/papers/fenrir-experiments"]
+	path = code/papers/fenrir-experiments
+	url = git@github.com:nathanaelbosch/fenrir-experiments.git

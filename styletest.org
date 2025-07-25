@@ -1,0 +1,343 @@
+# -*- mode: Org; eval: (auto-fill-mode 0); eval: (writeroom-mode 1); eval: (copilot-mode 1) -*- #
+#+TITLE: Flexible and Efficient Probabilistic Numerical Solvers for Ordinary Differential Equations
+# #+TITLE: Flexible and efficient inference in and of dynamical systems
+#+AUTHOR: Nathanael Bosch
+#+LATEX_CLASS: mimosis
+#+OPTIONS: TOC:nil title:nil ':t
+
+#+LATEX_HEADER: \input{preamble.tex}
+#+LATEX_HEADER: \input{math.tex}
+#+LATEX_HEADER: \input{glossary.tex}
+#+LATEX_HEADER: \addbibresource{~/MEGA/papers/references.bib}
+#+LATEX_HEADER: \usepackage{lipsum}
+
+# Mantra: Don't mix reading, planning, and writing! Concentrate on one.
+# In particular: Take time for pure writing!
+
+
+* Frontmatter                                                        :ignore:
+#+LATEX:   \frontmatter
+** Titlepage                                                        :ignore:
+# Check this for more inspiration
+# https://github.com/Pseudomanifold/latex-mimosis/blob/master/Sources/Title_Dissertation_Heidelberg.tex
+#+BEGIN_EXPORT latex
+\begin{titlepage}
+  \vspace*{2cm}
+  \makeatletter
+  \begin{center}
+  %
+    \begin{huge}
+      \@title
+    \end{huge}\\[0.1cm]
+    %
+    \vfill
+    %
+    {\bfseries Dissertation}\\[0pt]
+			%\vspace*{5pt}
+			{%\sffamily
+				der Mathematisch-Naturwissenschaftlichen Fakultät\\
+				der Eberhard Karls Universität Tübingen\\
+				zur Erlangung des Grades eines\\
+				Doktors der Naturwissenschaften\\
+				(Dr.\ rer.\ nat.)}
+    %
+    \vfill
+    %
+    vorgelegt von\\
+    \textbf{\@author}\\
+    aus Stuttgart
+    %
+    \vfill
+    %
+    Tübingen\\
+    2024
+  \end{center}
+  \makeatother
+\end{titlepage}
+
+\clearpage\normalsize
+%
+\thispagestyle{empty}{\raggedright\null\vfill
+Gedruckt mit Genehmigung der Mathematisch-Naturwissenschaftlichen Fakultät der
+Eberhard Karls Universität Tübingen.\par\bigskip\bigskip\bigskip\noindent
+\begin{tabular}{@{}ll}
+Tag der m\"{u}ndlichen Qualifikation: \qquad & 1234 \\
+&\\
+Dekan: & DEAN \\
+1. Berichterstatter: & EXP1 \\
+2. Berichterstatter: & EXP2 \\
+3. Berichterstatter: & EXP3 \\
+\end{tabular}
+}
+\clearpage
+
+
+\thispagestyle{empty}
+\newpage
+#+END_EXPORT
+
+** Abstract                                                         :ignore:
+#+latex: \addcontentsline{toc}{chapter}{Abstract}
+#+BEGIN_EXPORT latex
+\begin{center}
+  \textsc{Abstract}
+\end{center}
+%
+\noindent
+#+END_EXPORT
+
+# 1: Background. Introducing subject area, an indication of centrality and, if
+# appropriate summary of research so far (3-5 sentences)
+/Probabilistic numerics/ has emerged as an efficient framework for simulation and uncertainty quantification in dynamical systems.
+While classical numerical methods typically compute only a single point estimate, probabilistic numerical methods provide a full posterior distribution over the solution, and thereby quantify their own numerical approximation error in a structured manner.
+
+\clearpage
+
+** Zusammenfassung                                                  :ignore:
+#+latex: \addcontentsline{toc}{chapter}{Zusammenfassung}
+#+BEGIN_EXPORT latex
+\begin{center}
+  \textsc{Zusammenfassung}
+\end{center}
+%
+\noindent
+#+END_EXPORT
+
+
+#+latex: \clearpage
+** Acknowledgements                                                 :ignore:
+#+latex: \addcontentsline{toc}{chapter}{Acknowledgements}
+#+BEGIN_EXPORT latex
+\begin{center}
+  \textsc{Acknowledgements}
+\end{center}
+%
+\noindent
+#+END_EXPORT
+
+Thanks
+
+#+begin_export latex
+\begin{flushright}
+  \textit{Nathanael Bosch}\\
+  Tübingen, 31 März, 2024
+\end{flushright}
+#+end_export
+
+#+latex: \clearpage
+
+** TOC                                                              :ignore:
+#+latex: \addcontentsline{toc}{chapter}{\contentsname}
+#+latex: \tableofcontents
+
+* Mainmatter                                                         :ignore:
+#+LATEX:   \mainmatter
+# If I want to I could use \part{} to add more structure
+\part{Main part}
+
+#+begin_export latex
+\KOMAoptions{open=left}
+#+end_export
+
+
+** Layout test
+\lipsum[][1-6]
+
+#+attr_latex: :options [Explicit Euler method]
+#+begin_alg
+Given an ODE initial value problem \((\vf, \val_0)\) and a discrete time grid \(\{ t_n \}_{n=0}^N \subset [0, T]\), perform the following steps:
+#+ATTR_LATEX: :options [noitemsep]
+1. Set the initial condition \(\hat{\val}_0 = \val_0\).
+2. For \(n = 1, \ldots, N\), compute the update step
+   \begin{equation}
+     \hat{\val}_{n} = \hat{\val}_{n-1} + (t_{n} - t_{n-1}) \vf(\hat{\val}_{n-1}, t_{n-1}).
+   \end{equation}
+Return the discrete approximate solution \(\{ \hat{\val}_n \}_{n=0}^N\).
+#+end_alg
+
+\lipsum[][4-6]
+
+# #+attr_latex: :options {Logistic ODE}{logistic-ode}
+#+attr_latex: :options [\bfseries Logistic ODE]
+#+name: example:logistic-ode
+#+begin_exmple
+Consider the logistic ODE given by
+The logistic ODE describes the growth of a population \(\val(t)\) that grows proportionally to its size, but is limited by some carrying capacity.
+It is given by the differential equation
+\begin{equation}
+  \dot{\val}(t) = \alpha \val(t) (1 - \val(t)),
+\end{equation}
+where \(\alpha > 0\) is a growth rate parameter,
+and with an initial condition \(\val(0) = \val_0\).
+The solution of this ODE is given by the logistic function:
+\begin{equation}
+  \val(t) = \frac{1}{1 + (1/\val_0 - 1) \exp(-\alpha t)}.
+\end{equation}
+See the left plot in cref:fig:rk for a visualization of the logistic ODE and its analytical solution.
+#+end_exmple
+
+\lipsum[][7-8]
+
+#+ATTR_LATEX: :options [Batch GP regression]
+#+begin_proposition
+Let \(\sval \sim \GP(0, \gpcovfun)\) be a Gaussian process and \(\{\sobs_i\}_{i=1}^N\) be noisy observations of \(\sval\) as defined above.
+Then, the posterior distribution of \(\sval(\cdot)\) given \(\sobs_{1:N}\) is again a Gaussian process, with
+\begin{align}
+\label{eq:gmp:batch-gp-regression}
+\begin{split}
+  \p(\sval(\xi_{1:M}') \mid \sobs_{1:N}) \sim \N \Big(
+    &\gpcovmat_{MN} \left( \gpcovmat_{NN} + \sigma^2 \eye \right)^{-1} \sobs_{1:N}, \\
+    &\gpcovmat_{MM} - \gpcovmat_{MN} \left( \gpcovmat_{NN} + \sigma^2 \eye \right)^{-1} \gpcovmat_{MN}^\T
+    \Big),
+\end{split}
+\end{align}
+where \(\xi_{1:M}'\) are the arbitrary locations at which we want to compute the posterior,
+and with
+\(\gpcovmat_{NN} := k(\xi_{1:N}, \xi_{1:N})\),
+\(\gpcovmat_{MN} := k(\xi_{1:M}', \xi_{1:N})\), and
+\(\gpcovmat_{MM} := k(\xi_{1:M}', \xi_{1:M}')\).
+#+end_proposition
+
+#+begin_proof
+First, we compute the posterior exactly on the input locations, that is
+\( \p(\sval(\xi_{1:N}) \mid \sobs_{1:N}) \).
+Recall that the joint distribution of the function values at the observation locations is Gaussian, with
+\(\sval(\xi_{1:N}) \sim \N( \vect{0}, \gpcovmat_{NN} )\).
+Since the observations \(\sobs_{1:N}\) are generated from \(\sval(\xi_{1:N})\) with a linear Gaussian conditional distribution
+\(\p( \sobs_{1:N} \mid \sval(\xi_{1:N}) ) = \N( \sval(\xi_{1:N}), \sigma^2 I )\),
+we can directly apply the Gaussian inversion formula
+and obtain
+\begin{equation}
+\begin{split}
+  \p(\sval(\xi_{1:N}) \mid \sobs_{1:N}) = \N \Big(
+    &\gpcovmat_{NN} \left( \gpcovmat_{NN} + \sigma^2 \eye \right)^{-1} \sobs_{1:N,} \\
+    &\gpcovmat_{NN} - \gpcovmat_{NN} \left( \gpcovmat_{NN} + \sigma^2 \eye \right)^{-1}  \gpcovmat_{NN}^\T
+  \Big).
+\end{split}
+\end{equation}
+This concludes the proof.
+#+end_proof
+
+#+ATTR_LATEX: :options [Computational cost of batch Gaussian process regression]
+#+begin_remark
+Implementing this naively is expensive!
+Cref:eq:gmp:batch-gp-regression
+requires inverting the \((N \times N)\)-dimensional Gramian \(\gpcovmat_{NN} + \sigma^2 \eye\), which has cost \(\order{N^3}\).
+#+end_remark
+
+*** Subsection with some title that might be a bit longer
+\lipsum[1-2]
+
+#+attr_latex: :options [Explicit Euler method]
+#+begin_alg
+Given an ODE initial value problem \((\vf, \val_0)\) and a discrete time grid \(\{ t_n \}_{n=0}^N \subset [0, T]\), perform the following steps:
+#+ATTR_LATEX: :options [noitemsep]
+1. Set the initial condition \(\hat{\val}_0 = \val_0\).
+2. For \(n = 1, \ldots, N\), compute the update step
+   \begin{equation}
+     \hat{\val}_{n} = \hat{\val}_{n-1} + (t_{n} - t_{n-1}) \vf(\hat{\val}_{n-1}, t_{n-1}).
+   \end{equation}
+Return the discrete approximate solution \(\{ \hat{\val}_n \}_{n=0}^N\).
+#+end_alg
+
+\lipsum[][4-6]
+
+# #+attr_latex: :options {Logistic ODE}{logistic-ode}
+#+attr_latex: :options [\bfseries Logistic ODE]
+#+name: example:logistic-ode
+#+begin_exmple
+Consider the logistic ODE given by
+The logistic ODE describes the growth of a population \(\val(t)\) that grows proportionally to its size, but is limited by some carrying capacity.
+It is given by the differential equation
+\begin{equation}
+  \dot{\val}(t) = \alpha \val(t) (1 - \val(t)),
+\end{equation}
+where \(\alpha > 0\) is a growth rate parameter,
+and with an initial condition \(\val(0) = \val_0\).
+The solution of this ODE is given by the logistic function:
+\begin{equation}
+  \val(t) = \frac{1}{1 + (1/\val_0 - 1) \exp(-\alpha t)}.
+\end{equation}
+See the left plot in cref:fig:rk for a visualization of the logistic ODE and its analytical solution.
+#+end_exmple
+
+\lipsum[][7-8]
+
+#+ATTR_LATEX: :options [Batch GP regression]
+#+begin_proposition
+Let \(\sval \sim \GP(0, \gpcovfun)\) be a Gaussian process and \(\{\sobs_i\}_{i=1}^N\) be noisy observations of \(\sval\) as defined above.
+Then, the posterior distribution of \(\sval(\cdot)\) given \(\sobs_{1:N}\) is again a Gaussian process, with
+\begin{align}
+\label{eq:gmp:batch-gp-regression}
+\begin{split}
+  \p(\sval(\xi_{1:M}') \mid \sobs_{1:N}) \sim \N \Big(
+    &\gpcovmat_{MN} \left( \gpcovmat_{NN} + \sigma^2 \eye \right)^{-1} \sobs_{1:N}, \\
+    &\gpcovmat_{MM} - \gpcovmat_{MN} \left( \gpcovmat_{NN} + \sigma^2 \eye \right)^{-1} \gpcovmat_{MN}^\T
+    \Big),
+\end{split}
+\end{align}
+where \(\xi_{1:M}'\) are the arbitrary locations at which we want to compute the posterior,
+and with
+\(\gpcovmat_{NN} := k(\xi_{1:N}, \xi_{1:N})\),
+\(\gpcovmat_{MN} := k(\xi_{1:M}', \xi_{1:N})\), and
+\(\gpcovmat_{MM} := k(\xi_{1:M}', \xi_{1:M}')\).
+#+end_proposition
+
+#+begin_proof
+First, we compute the posterior exactly on the input locations, that is
+\( \p(\sval(\xi_{1:N}) \mid \sobs_{1:N}) \).
+Recall that the joint distribution of the function values at the observation locations is Gaussian, with
+\(\sval(\xi_{1:N}) \sim \N( \vect{0}, \gpcovmat_{NN} )\).
+Since the observations \(\sobs_{1:N}\) are generated from \(\sval(\xi_{1:N})\) with a linear Gaussian conditional distribution
+\(\p( \sobs_{1:N} \mid \sval(\xi_{1:N}) ) = \N( \sval(\xi_{1:N}), \sigma^2 I )\),
+we can directly apply the Gaussian inversion formula
+and obtain
+\begin{equation}
+\begin{split}
+  \p(\sval(\xi_{1:N}) \mid \sobs_{1:N}) = \N \Big(
+    &\gpcovmat_{NN} \left( \gpcovmat_{NN} + \sigma^2 \eye \right)^{-1} \sobs_{1:N,} \\
+    &\gpcovmat_{NN} - \gpcovmat_{NN} \left( \gpcovmat_{NN} + \sigma^2 \eye \right)^{-1}  \gpcovmat_{NN}^\T
+  \Big).
+\end{split}
+\end{equation}
+
+In the second step, we compute the posterior at arbitrary locations \(\xi_{1:M}'\), that is \(\p(\sval(\xi_{1:M}') \mid \sobs_{1:N})\).
+This can again be computed by applying the right Gaussian inference formulas from
+\cref{sec:affine-gaussian-inference}:
+Observe that the desired quantity can be written as a marginalization
+\begin{equation}
+  \p(\sval(\xi_{1:M}') \mid \sobs_{1:N}) = \int \p(\sval(\xi_{1:M}') \mid \sval(\xi_{1:N})) \p(\sval(\xi_{1:N}) \mid \sobs_{1:N}) \dd(\sval(\xi_{1:N})),
+\end{equation}
+with Gaussian \(\p(\sval(\xi_{1:N}) \mid \sobs_{1:N}) = \N(\mu_\text{post}, \Sigma_\text{post}) \)
+and a linear conditional Gaussian
+\begin{equation}
+  \p(\sval(\xi_{1:M}') \mid \sval(\xi_{1:N})) \sim \N(
+    \gpcovmat_{MN} \gpcovmat_{NN}^{-1} \sval(\xi_{1:N}),
+    \gpcovmat_{MM} - \gpcovmat_{MN} \gpcovmat_{NN}^{-1}  \gpcovmat_{MN}^\T
+  ).
+\end{equation}
+Apply the marginalization formula from
+\cref{sec:affine-gaussian-inference}
+yields the posterior distribution
+\begin{align}
+\begin{split}
+  \p(\sval(\xi_{1:M}') \mid \sobs_{1:N}) \sim \N \Big(
+    &\gpcovmat_{MN} \left( \gpcovmat_{NN} + \sigma^2 \eye \right)^{-1} \sobs_{1:N}, \\
+    &\gpcovmat_{MM} - \gpcovmat_{MN} \left( \gpcovmat_{NN} + \sigma^2 \eye \right)^{-1} \gpcovmat_{MN}^\T
+    \Big).
+\end{split}
+\end{align}
+This concludes the proof.
+#+end_proof
+
+#+ATTR_LATEX: :options [Computational cost of batch Gaussian process regression]
+#+begin_remark
+Implementing this naively is expensive!
+Cref:eq:gmp:batch-gp-regression
+requires inverting the \((N \times N)\)-dimensional Gramian \(\gpcovmat_{NN} + \sigma^2 \eye\), which has cost \(\order{N^3}\).
+#+end_remark
+
+* Backmatter                                                         :ignore:
+#+latex: \backmatter
+** Bibliography                                                     :ignore:
+#+LATEX: \printbibliography

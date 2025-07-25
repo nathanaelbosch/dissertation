@@ -1,0 +1,114 @@
+\newenvironment{proofsketch}{\textit{Sketch of the proof.}}{\hfill$\square$}
+
+% \newcommand{\tr}{\operatorname{tr}}
+\newcommand{\T}{\top}
+\newcommand{\logdet}[1]{\log \left| #1 \right|}
+
+
+% \newcommand{\vect}[1]{\mathbf{#1}}
+% \newcommand{\mat}[1]{\bm{#1}}
+\newcommand{\vect}[1]{#1}
+\newcommand{\mat}[1]{#1}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\eye}{\mat{I}}
+\newcommand{\I}[1]{\mat{I}_{#1}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\Z}{\mathcal{Z}}
+
+\DeclareDocumentCommand\dirac{}{\opbraces{\delta}}
+\DeclareDocumentCommand\p{}{\opbraces{p}}
+\DeclareDocumentCommand\q{}{\opbraces{q}}
+\DeclareDocumentCommand\N{}{\opbraces{\mathcal{N}}}
+\DeclareDocumentCommand\GP{}{\opbraces{\mathcal{GP}}}
+\DeclareDocumentCommand\dirac{}{\opbraces{\delta}}
+\DeclareDocumentCommand\E{}{\opbraces{\mathbb{E}}}
+\DeclareDocumentCommand\C{}{\opbraces{\mathbb{C}}}
+
+\DeclareDocumentCommand\tria{}{\opbraces{\operatorname{tria}}}
+\DeclareDocumentCommand\diag{}{\opbraces{\operatorname{diag}}}
+
+
+\newcommand{\jac}[1]{J_{#1}}
+% \newcommand{\jac}[2]{J_{#1}(#2)}
+% \newcommand{\jac}[2]{\eval{\pdv{#1}{x}}_{x=#2}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% My notation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\sval}{y} % the ODE solution (scalar)
+\newcommand{\vval}{\vect{y}} % the ODE solution (vector)
+\newcommand{\val}{\sval}
+\newcommand{\st}{x} % the SSM representation
+\newcommand{\vobs}{\vect{z}} % the SSM observations (vector)
+\newcommand{\sobs}{z} % the SSM observations (scalar)
+\newcommand{\obs}{\sobs}
+\newcommand{\oobs}{u}
+
+\newcommand{\mean}[1]{\vect{\mu}_{#1}} %
+\newcommand{\cov}[1]{\mat{\Sigma}_{#1}} %
+\newcommand{\covb}[1]{\breve{\mat{\Sigma}}_{#1}}
+
+\newcommand{\gpmeanfun}{m}
+\newcommand{\gpcovfun}{k}
+\newcommand{\gpcovmat}{\mat{K}}
+
+% \newcommand{\stmean}{\mean{\st}} %
+% \newcommand{\stcov}{\cov{\st}} %
+% \newcommand{\obsmean}{\mean{\obs}} %
+% \newcommand{\obscov}{\cov{\obs}} %
+
+\newcommand{\drift}{\mat{F}} %
+\newcommand{\disp}{\mat{\Gamma}^{1/2}} %
+\newcommand{\dispb}{\breve{\mat{\Gamma}}^{1/2}} %
+\newcommand{\dispc}{\check{\mat{\Gamma}}^{1/2}} %
+\newcommand{\dispsq}{\mat{\Gamma}} %
+\newcommand{\wiener}{\vect{w}} %
+\newcommand{\proj}[1]{\mat{E}_{#1}} %
+% \newcommand{\diff}{\sigma}
+\newcommand{\sdiff}{\sigma}
+\newcommand{\Diff}{\Xi^{1/2}}
+\newcommand{\DiffHat}{\hat{\Xi}^{1/2}}
+\newcommand{\DiffSq}{\Xi}
+\newcommand{\DiffBase}{\Xi}
+\newcommand{\DiffMLE}{\hat{\Xi}^{1/2}_\text{MLE}}
+
+\newcommand{\IWP}[1]{\ensuremath{\operatorname{IWP}(#1)}}
+\newcommand{\IOUP}{\ensuremath{\operatorname{IOUP}}}
+
+\newcommand{\transf}{f} %
+\newcommand{\transA}{\mat{A}} %
+\newcommand{\transb}{\vect{b}} %
+\newcommand{\transC}{\mat{Q}} %
+\newcommand{\obsh}{h} %
+\newcommand{\obsA}{\mat{H}} %
+\newcommand{\obsb}{\vect{c}} %
+\newcommand{\obsC}{\mat{R}} %
+\newcommand{\outA}{\mat{E}} %
+
+\newcommand{\invtransA}{\mat{G}} %
+\newcommand{\invtransb}{\vect{d}} %
+\newcommand{\invtransC}{\mat{\Lambda}} %
+
+\newcommand{\numparams}{K}
+\newcommand{\numdims}{d}
+\newcommand{\numderviatives}{q}
+\newcommand{\numstates}{D}
+\newcommand{\numtimes}{N}
+\newcommand{\numdata}{M}
+\newcommand{\numtemperingsteps}{n}
+
+\newcommand{\dt}{{\Delta t}}
+\newcommand{\tindex}{n}
+\newcommand{\idxt}{\tindex}
+\newcommand{\tindexmax}{N}
+\newcommand{\idxtmax}{\tindexmax}
+
+\newcommand{\data}{\mathcal{D}}
+
+\DeclareDocumentCommand\PNML{}{\widehat{\mathcal{M}}_\text{PN}}
+\DeclareDocumentCommand\ML{}{\mathcal{M}}
+\newcommand{\MLE}[1]{\hat{#1}_\text{MLE}}
+
+\DeclareDocumentCommand\vf{}{\opbraces{f}}

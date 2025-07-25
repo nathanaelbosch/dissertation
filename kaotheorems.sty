@@ -1,0 +1,401 @@
+\ProvidesPackage{kaotheorems}
+
+\RequirePackage{kvoptions} % Handle package options
+\SetupKeyvalOptions{
+	family = kaotheorems,
+	prefix = kaotheorems@
+}
+
+\DeclareBoolOption{splitbox}
+
+\newcommand{\kaotheorems@defaultbg}{Goldenrod!45!white}
+\DeclareStringOption[\kaotheorems@defaultbg]{background}
+\DeclareStringOption[\kaotheorems@defaultbg]{backgroundopacity}
+\DeclareStringOption[\kaotheorems@defaultbg]{theorembackground}
+\DeclareStringOption[\kaotheorems@defaultbg]{propositionbackground}
+\DeclareStringOption[\kaotheorems@defaultbg]{lemmabackground}
+\DeclareStringOption[\kaotheorems@defaultbg]{corollarybackground}
+\DeclareStringOption[\kaotheorems@defaultbg]{definitionbackground}
+\DeclareStringOption[\kaotheorems@defaultbg]{assumptionbackground}
+\DeclareStringOption[\kaotheorems@defaultbg]{remarkbackground}
+\DeclareStringOption[\kaotheorems@defaultbg]{examplebackground}
+\DeclareStringOption[\kaotheorems@defaultbg]{exercisebackground}
+\DeclareStringOption[\kaotheorems@defaultbg]{algbackground}
+
+\ProcessKeyvalOptions{kaotheorems} % Process the options
+
+\let\openbox\relax % Workaround to avoid a nasty error
+
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{thmtools}
+
+\RequirePackage[most]{tcolorbox}
+
+% -------------------------------------------------------------------------------
+%	Box style
+% -------------------------------------------------------------------------------
+\tcbset{tcbkao/.style={
+    enhanced jigsaw,
+    breakable,
+    before skip=\topskip,
+    after skip=\topskip,
+    left skip=0pt,
+    right skip=0pt,
+    left=3pt,
+    right=3pt,
+    top=5pt,
+    bottom=3pt,
+    boxrule=1pt,
+    % sharp corners,
+    % boxrule=0pt,
+    % frame hidden,
+    % titlerule=.4pt,
+    % coltitle=black,
+    % colframe=\kaotheorems@background,
+    % fonttitle=\bfseries,
+  }}
+
+% ------------------------------------------------------------------------------
+%	Theorem styles
+% ------------------------------------------------------------------------------
+\declaretheoremstyle[
+  % headfont={\color{maincolor}\normalfont\bfseries},
+  headfont={\normalfont\bfseries},
+  bodyfont=\normalfont\itshape,
+  headpunct={},
+]{kaoplain}
+\declaretheoremstyle[
+  % headfont={\color{maincolor}\normalfont\bfseries},
+  headfont={\normalfont\bfseries},
+  bodyfont=\normalfont\itshape,
+  headpunct={},
+  postheadspace={.5em plus .1em minus .1em},
+]{kaodefinition}
+\declaretheoremstyle[
+  % headfont={\color{maincolor}\normalfont\bfseries},
+  headfont={\normalfont\bfseries},
+  bodyfont=\normalfont\itshape,
+  headpunct={},
+  postheadspace={.5em plus .1em minus .1em},
+]{kaoassumption}
+\declaretheoremstyle[
+  % headfont={\color{maincolor}\normalfont\bfseries},
+  headfont={\normalfont\bfseries},
+  headpunct={},
+  postheadspace={.5em plus .1em minus .1em},
+]{kaoremark}
+\declaretheoremstyle[
+  % headfont={\color{maincolor}\normalfont\bfseries},
+  headfont={\normalfont\bfseries},
+  headpunct={},
+  postheadspace={.5em plus .1em minus .1em},
+]{kaoexample}
+\declaretheoremstyle[
+  % headfont={\color{maincolor}\normalfont\bfseries},
+  headfont={\normalfont\bfseries},
+  headpunct={},
+  postheadspace={.5em plus .1em minus .1em},
+]{kaoalg}
+
+
+% -----------------------------------------------------------------------------
+%	Theorems with boxes split into title and main text using \newtcbtheorem
+% -----------------------------------------------------------------------------
+\ifkaotheorems@splitbox
+
+  \theoremstyle{kaoplain}
+  \newtcbtheorem[number within=section]{theorem}{Theorem}{
+    tcbkao,
+    colback=\kaotheorems@theorembackground,
+    colbacktitle=\kaotheorems@theorembackground,
+  }{thm}
+  \newtcbtheorem[number within=section]{lemma}{Lemma}{
+    tcbkao,
+    colback=\kaotheorems@lemmabackground,
+    colbacktitle=\kaotheorems@lemmabackground,
+  }{lemma}
+  \newtcbtheorem[number within=section]{proposition}{Proposition}{
+    tcbkao,
+    colback=\kaotheorems@propositionbackground,
+    colbacktitle=\kaotheorems@propositionbackground,
+  }{prop}
+  \newtcbtheorem[number within=section]{corollary}{Corollary}{
+    tcbkao,
+    colback=\kaotheorems@corollarybackground,
+    colbacktitle=\kaotheorems@corollarybackground,
+  }{cor}
+
+  \theoremstyle{kaodefinition}
+  \newtcbtheorem[number within=section]{definition}{Definition}{
+    tcbkao,
+    colback=\kaotheorems@definitionbackground,
+    colbacktitle=\kaotheorems@definitionbackground,
+  }{def}
+
+  \theoremstyle{kaoassumption}
+
+  \theoremstyle{kaoremark}
+  \newtcbtheorem[number within=section]{remark}{Remark}{
+    tcbkao,
+    colback=\kaotheorems@remarkbackground,
+    colbacktitle=\kaotheorems@remarkbackground,
+  }{remark}
+
+  \theoremstyle{kaoexample}
+  \newtcbtheorem[number within=section]{example}{Example}{
+    tcbkao,
+    colback=\kaotheorems@examplebackground,
+    colbacktitle=\kaotheorems@examplebackground,
+  }{example}
+  \newtcbtheorem[number within=section]{exmple}{Example}{
+    tcbkao,
+    colback=\kaotheorems@examplebackground,
+    colbacktitle=\kaotheorems@examplebackground,
+  }{example}
+
+  \theoremstyle{kaoalg}
+  \newtcbtheorem[number within=section]{alg}{Algorithm}{
+    tcbkao,
+    colback=\kaotheorems@algbackground,
+    colbacktitle=\kaotheorems@algbackground,
+  }{alg}
+
+\else
+
+  % ---------------------------------------------------------------------------
+  %	Theorems with single boxes using \declaretheorem and \tcolorboxenvironment
+  % ---------------------------------------------------------------------------
+
+	\theoremstyle{kaoplain}
+  \if@cref@capitalise
+	\declaretheorem[
+    name=Theorem,
+    style=kaoplain,
+    refname={Theorem,Theorems},
+    Refname={Theorem,Theorems},
+    numberwithin=chapter,
+	]{theorem}
+  \else
+	\declaretheorem[
+    name=Theorem,
+    style=kaoplain,
+    refname={theorem,theorems},
+    Refname={Theorem,Theorems},
+    numberwithin=chapter,
+	]{theorem}
+  \fi
+	\tcolorboxenvironment{theorem}{
+		colback=\kaotheorems@theorembackground!\kaotheorems@backgroundopacity!white,
+		colframe=\kaotheorems@theorembackground,
+    tcbkao,
+	}
+  \if@cref@capitalise
+	\declaretheorem[
+    name=Proposition,
+    refname={Proposition,Propositions},
+    Refname={Proposition,Propositions},
+    sibling=theorem,
+	]{proposition}
+  \else
+	\declaretheorem[
+    name=Proposition,
+    refname={proposition,propositions},
+    Refname={Proposition,Propositions},
+    sibling=theorem,
+	]{proposition}
+  \fi
+	\tcolorboxenvironment{proposition}{
+		colback=\kaotheorems@propositionbackground!\kaotheorems@backgroundopacity!white,
+		colframe=\kaotheorems@propositionbackground,
+    tcbkao,
+	}
+  \if@cref@capitalise
+	\declaretheorem[
+    name=Lemma,
+    refname={Lemma,Lemmas},
+    Refname={Lemma,Lemmas},
+    sibling=theorem,
+	]{lemma}
+  \else
+	\declaretheorem[
+    name=Lemma,
+    refname={lemma,lemmas},
+    Refname={Lemma,Lemmas},
+    sibling=theorem,
+	]{lemma}
+  \fi
+	\tcolorboxenvironment{lemma}{
+		colback=\kaotheorems@lemmabackground!\kaotheorems@backgroundopacity!white,
+		colframe=\kaotheorems@lemmabackground,
+    tcbkao,
+	}
+  \if@cref@capitalise
+	\declaretheorem[
+    name=Corollary,
+    refname={Corollary,Corollaries},
+    Refname={Corollary,Corollaries},
+    sibling=theorem,
+	]{corollary}
+  \else
+	\declaretheorem[
+    name=Corollary,
+    refname={corollary,corollaries},
+    Refname={Corollary,Corollaries},
+    sibling=theorem,
+	]{corollary}
+  \fi
+	\tcolorboxenvironment{corollary}{
+		colback=\kaotheorems@corollarybackground!\kaotheorems@backgroundopacity!white,
+		colframe=\kaotheorems@corollarybackground,
+    tcbkao,
+	}
+
+	\theoremstyle{kaodefinition}
+  \if@cref@capitalise
+	\declaretheorem[
+    name=Definition,
+    refname={Definition,Definitions},
+    Refname={Definition,Definitions},
+    numberwithin=chapter,
+	]{definition}
+  \else
+	\declaretheorem[
+    name=Definition,
+    refname={definition,definitions},
+    Refname={Definition,Definitions},
+    numberwithin=chapter,
+	]{definition}
+  \fi
+	\tcolorboxenvironment{definition}{
+		colback=\kaotheorems@definitionbackground!\kaotheorems@backgroundopacity!white,
+		colframe=\kaotheorems@definitionbackground,
+    tcbkao,
+	}
+
+	\theoremstyle{kaoassumption}
+  \if@cref@capitalise
+	\declaretheorem[
+    name=Assumption,
+    refname={Assumption,Assumptions},
+    Refname={Assumption,Assumptions},
+    numberwithin=chapter,
+	]{assumption}
+  \else
+	\declaretheorem[
+    name=Assumption,
+    refname={assumption,assumptions},
+    Refname={Assumption,Assumptions},
+    numberwithin=chapter,
+	]{assumption}
+  \fi
+	\tcolorboxenvironment{assumption}{
+		colback=\kaotheorems@assumptionbackground!\kaotheorems@backgroundopacity!white,
+		colframe=\kaotheorems@assumptionbackground,
+    tcbkao,
+	}
+
+	\theoremstyle{kaoremark}
+  \if@cref@capitalise
+	\declaretheorem[
+    name=Remark,
+    refname={Remark,Remarks},
+    Refname={Remark,Remarks},
+    numberwithin=chapter,
+	]{remark}
+  \else
+	\declaretheorem[
+    name=Remark,
+    refname={remark,remarks},
+    Refname={Remark,Remarks},
+    numberwithin=chapter,
+	]{remark}
+  \fi
+	\tcolorboxenvironment{remark}{
+		colback=\kaotheorems@remarkbackground!\kaotheorems@backgroundopacity!white,
+		colframe=\kaotheorems@remarkbackground,
+    tcbkao,
+	}
+
+	\theoremstyle{kaoexample}
+  \if@cref@capitalise
+	\declaretheorem[
+    name=Example,
+    refname={Example,Examples},
+    Refname={Example,Examples},
+    numberwithin=chapter,
+	]{example}
+  \else
+	\declaretheorem[
+    name=Example,
+    refname={example,examples},
+    Refname={Example,Examples},
+    numberwithin=chapter,
+	]{example}
+  \fi
+	\tcolorboxenvironment{example}{
+		colback=\kaotheorems@examplebackground!\kaotheorems@backgroundopacity!white,
+		colframe=\kaotheorems@examplebackground,
+    tcbkao,
+	}
+  \if@cref@capitalise
+	\declaretheorem[
+    name=Example,
+    refname={Example,Examples},
+    Refname={Example,Examples},
+    numberwithin=chapter,
+	]{exmple}
+  \else
+	\declaretheorem[
+    name=Example,
+    refname={example,examples},
+    Refname={Example,Examples},
+    numberwithin=chapter,
+	]{exmple}
+  \fi
+	\tcolorboxenvironment{exmple}{
+		colback=\kaotheorems@examplebackground!\kaotheorems@backgroundopacity!white,
+		colframe=\kaotheorems@examplebackground,
+    tcbkao,
+	}
+
+	\theoremstyle{kaoalg}
+  \if@cref@capitalise
+	\declaretheorem[
+    name=Algorithm,
+    refname={Algorithm,Algorithms},
+    Refname={Algorithm,Algorithms},
+    numberwithin=chapter,
+	]{alg}
+  \else
+	\declaretheorem[
+    name=Algorithm,
+    refname={algorithm,algorithms},
+    Refname={Algorithm,Algorithms},
+    numberwithin=chapter,
+	]{alg}
+  \fi
+	\tcolorboxenvironment{alg}{
+		colback=\kaotheorems@algbackground!\kaotheorems@backgroundopacity!white,
+		colframe=\kaotheorems@algbackground,
+    tcbkao,
+    % unbreakable,
+    lines before break=5,
+    % colframe=gray!40,
+    % colback=gray!5,
+    % sharp corners,
+	}
+
+
+	% \tcolorboxenvironment{proof}{
+  %   tcbkao,
+  %   enhanced jigsaw,
+  %   breakable,
+  %   colback=gray!5,
+  %   colframe=gray!40,
+  %   opacitytext=0.8,
+	% }
+
+\fi
+
+\renewcommand\qedsymbol{$\square$}

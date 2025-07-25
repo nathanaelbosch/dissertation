@@ -1,0 +1,315 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% University
+\definecolor{UoTred}{RGB}{165,30,55}
+\definecolor{UoTdark}{RGB}{50,65,75}
+\definecolor{UoTgold}{RGB}{180,160,105}
+\definecolor{UoTgray}{RGB}{185,184,188}
+\definecolor{UoTdarkblue}{RGB}{65,90,140}
+\definecolor{UoTblue}{RGB}{0,105,170}
+\definecolor{UoTlightblue}{RGB}{80,170,200}
+\definecolor{UoTlightgreen}{RGB}{125,165,75}
+\definecolor{UoTgreen}{RGB}{125,165,75}
+\definecolor{UoTdarkgreen}{RGB}{50,110,30}
+\definecolor{UoTlightred}{RGB}{200,80,60}
+\definecolor{UoTpurple}{RGB}{175,110,150}
+\definecolor{UoTorange}{RGB}{210,150,0}
+
+% TUM
+\definecolor{TUMblue}{RGB}{0,101,189}
+\definecolor{TUMDarkBlue}{RGB}{0,82,147}
+\definecolor{TUMLightBlue}{RGB}{100,160,200}
+\definecolor{TUMLighterBlue}{RGB}{152,198,234}
+\definecolor{TUMorange}{RGB}{227,114,34}
+\definecolor{TUMgreen}{RGB}{162,173,0}
+
+% Aalto
+\definecolor{aaltoyellow}{cmyk}{0,0,75,0}
+
+% Julia
+\definecolor{jblue}{rgb}{0.251,0.388,0.847}
+\definecolor{jgreen}{rgb}{0.22,0.596,0.149}
+\definecolor{jpurple}{rgb}{0.584,0.345,0.698}
+\definecolor{jred}{rgb}{0.796,0.235,0.2}
+
+\colorlet{maincolor}{UoTblue}
+
+\colorlet{allboxcolor}{UoTblue}
+\colorlet{algboxcolor}{UoTpurple}
+\colorlet{propositionboxcolor}{allboxcolor}
+\colorlet{corollaryboxcolor}{allboxcolor}
+\colorlet{definitionboxcolor}{allboxcolor}
+\colorlet{exampleboxcolor}{UoTgreen}
+\colorlet{remarkboxcolor}{UoTdarkblue}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Font settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \setmainfont{LibreBaskerville}
+% \setsansfont{IBM Plex Sans}
+% \setmonofont{IBM Plex Mono}
+
+% \usepackage{baskervaldx}
+
+\usepackage[defaultsans]{lato}
+% \usepackage{lmodern}
+\usepackage{anyfontsize}
+
+% Set KOMA fonts for book-specific elements
+\addtokomafont{part}{\normalfont\scshape\bfseries\sffamily}
+\addtokomafont{partentry}{\normalfont\scshape\bfseries}
+\addtokomafont{chapter}{\normalfont\bfseries}
+\addtokomafont{chapterentry}{\normalfont\bfseries}
+
+% Set KOMA fonts for elements common to all classes
+\addtokomafont{section}{\normalfont\bfseries}
+\addtokomafont{subsection}{\normalfont\bfseries}
+\addtokomafont{subsubsection}{\normalfont\bfseries}
+\addtokomafont{paragraph}{\normalfont\bfseries}
+\setkomafont{descriptionlabel}{\normalfont\bfseries}
+
+\addtokomafont{chapter}{\normalfont\sffamily}
+\addtokomafont{chapterprefix}{\normalfont\sffamily}
+\addtokomafont{section}{\normalfont\sffamily}
+\addtokomafont{subsection}{\normalfont\sffamily}
+\addtokomafont{subsubsection}{\normalfont\sffamily}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{minted}
+\usepackage[capitalize,noabbrev]{cleveref}
+\crefname{equation}{eq.}{eqs.}
+\usepackage{physics}
+\usepackage{lipsum}
+\usepackage{nccmath}
+\usepackage{mathtools}
+\usepackage{bbm}
+\usepackage{enumitem}
+\usepackage{etoc}
+\usepackage{svg}
+
+\usepackage{pdfpages}
+\newcommand{\fakesection}[1]{%
+  \par\refstepcounter{section}% Increase section counter
+  \sectionmark{#1}% Add section mark (header)
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}% Add section to ToC
+  % Add more content here, if needed.
+}
+\newcommand{\includepaper}[3]{
+  \cleardoublepage
+  \includepdf[
+    pages=1,
+    pagecommand={\fakesection{#2}\label{#3}},
+    fitpaper,
+    % frame=true,
+    noautoscale,
+    height=1.13\textheight,
+  ]{#1}
+  \includepdf[
+    pages=2-,
+    pagecommand={},
+    fitpaper,
+    % frame=true,
+    noautoscale,
+    height=1.13\textheight,
+  ]{#1}
+}
+
+
+\usepackage[most]{tcolorbox}
+\tcbset{simplebox/.style={
+  unbreakable,
+  colback=gray!10,
+  sharp corners=all,
+  boxrule=0.5pt,
+}}
+
+
+\usepackage[noEnd=false]{algpseudocodex}
+\usepackage{algorithm}
+\newenvironment{myalgorithm}{\algorithm}{\endalgorithm}
+\tcolorboxenvironment{myalgorithm}{
+  simplebox,
+  left=10pt,
+  right=10pt,
+  top=0pt,
+  bottom=10pt,
+}
+
+
+\usepackage[
+  background=allboxcolor,
+  backgroundopacity=10,
+  theorembackground=theoremboxcolor,
+  propositionbackground=propositionboxcolor,
+  lemmabackground=lemmaboxcolor,
+  corollarybackground=corollaryboxcolor,
+  definitionbackground=definitionboxcolor,
+  assumptionbackground=assumptionboxcolor,
+  remarkbackground=remarkboxcolor,
+  examplebackground=exampleboxcolor,
+  exercisebackground=exerciseboxcolor,
+  algbackground=algboxcolor,
+]{kaotheorems}
+
+
+\usepackage{tikz}
+\usetikzlibrary{bayesnet}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+
+% \usepackage[%
+\hypersetup{%
+  colorlinks = true,
+  citecolor  = UoTdarkblue,
+  linkcolor  = UoTdarkblue,
+  urlcolor   = UoTdarkblue,
+  unicode,
+  linktocpage=true,
+}
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{naturalnames}{hyperref}
+
+\usepackage[%
+  backend=biber,
+  % style=apa,
+  style=numeric,
+  maxbibnames=99,
+  maxcitenames=1,
+  uniquename=init,
+  uniquelist=false,
+  url=false,
+  % date=year,
+  doi=false,
+  ]{biblatex}
+  \AtEveryBibitem{\clearfield{month}}
+  % \AtEveryBibitem{\clearfield{url}}
+  \AtEveryBibitem{\clearfield{editor}}
+  % \AtEveryBibitem{\clearfield{eprint}}
+  % \AtEveryBibitem{\clearfield{pages}}
+  % \AtEveryBibitem{\clearfield{volume}}
+
+  % \usepackage[%
+  % skip=5.5pt,%
+  % ]{parskip}
+
+
+\newcommand{\capos}{\hyperlink{capos}{Publication I}}
+\newcommand{\pickandmix}{\hyperlink{pickandmix}{Publication II}}
+\newcommand{\highdim}{\hyperlink{highdim}{Publication III}}
+\newcommand{\fenrir}{\hyperlink{fenrir}{Publication IV}}
+\newcommand{\probexpint}{\hyperlink{probexpint}{Publication V}}
+\newcommand{\tempering}{\hyperlink{tempering}{Publication VI}}
+\newcommand{\pint}{\hyperlink{pint}{Publication VII}}
+\newcommand{\joss}{\hyperlink{joss}{Publication VIII}}
+\newcommand{\publications}[1]{\hyperlink{listofpublications}{Publications #1}}
+\newcommand{\scapos}{\hyperlink{capos}{I}}
+\newcommand{\spickandmix}{\hyperlink{pickandmix}{II}}
+\newcommand{\shighdim}{\hyperlink{highdim}{III}}
+\newcommand{\sfenrir}{\hyperlink{fenrir}{IV}}
+\newcommand{\sprobexpint}{\hyperlink{probexpint}{V}}
+\newcommand{\stempering}{\hyperlink{tempering}{VI}}
+\newcommand{\spint}{\hyperlink{pint}{VII}}
+\newcommand{\sjoss}{\hyperlink{joss}{VIII}}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Utilities
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\equalc}{\textsuperscript{*}}
+
+\newcommand{\chapterbasedonbox}[1]{%
+  \begin{tcolorbox}[
+    colback=gray!10,
+    % colframe=UoTblue,
+    % sharp corners=all,
+    % boxrule=0.5pt,
+    % before skip=\topskip,
+    % after skip=\topskip,
+    % left skip=0pt,
+    % right skip=0pt,
+    left=3pt,
+    right=3pt,
+    % top=5pt,
+    % bottom=3pt,
+    boxrule=1pt,
+    ]
+    #1
+  \end{tcolorbox}
+}
+\newcommand{\chapterbasedon}[2]{%
+  \chapterbasedonbox{\textbf{This chapter is based on #1:}
+    \begin{itemize}[
+      left=0pt .. 1em,
+      topsep=3pt,
+      itemsep=3pt,
+      parsep=0pt,
+      ]
+      \item[] #2
+    \end{itemize}
+  }
+}
+
+
+\newcommand{\algeqspacing}{%
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\belowdisplayshortskip}{2pt}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{-8pt}
+}
+
+\newcommand{\wrapupsec}{Conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Layout things
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand\contentsname{Table of Contents}
+\addto\captionsenglish{% Replace "english" with the language you use
+  \renewcommand{\contentsname}%
+    {Table of Contents}%
+}
+
+% \setcounter{tocdepth}{1}
+
+\makeatletter
+\newcommand\matter@switch{}
+\addtokomafont{chapterentry}{\matter@switch}
+\g@addto@macro\frontmatter{%
+  \addtocontents{toc}{%
+    \protect\renewcommand\protect\matter@switch{\normalfont\itshape}%
+  }%
+}
+\g@addto@macro\mainmatter{%
+  \addtocontents{toc}{%
+    \protect\renewcommand\protect\matter@switch{}%
+  }%
+}
+\makeatother
+
+% TOC: Parts in colour
+\newcommand\tocpartstyle[1]{%
+  \scshape\large\bfseries\textcolor{maincolor}{#1}}
+\DeclareTOCStyleEntries[pagenumberwidth=2.5em, entryformat=\tocpartstyle]{tocline}{part}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tikx in figure captions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Coloured dashed line
+\DeclareRobustCommand{\dashedcolorline}[1]{%
+	\begin{tikzpicture}
+		\raisebox{1.5pt}{
+			\draw[#1,dashed,line width=1.5pt] (0,0) -- (1em,0);
+		}
+	\end{tikzpicture}%
+}
+\DeclareRobustCommand{\colordot}[1]{%
+	\begin{tikzpicture}[baseline=(a.south)]
+		\node[circle, scale=0.75,color=white, fill=#1] (a) {};
+	\end{tikzpicture}%
+}
